@@ -1,0 +1,18 @@
+name: spark-local
+
+services:
+  spark:
+    image: spark:4.2.1-python3
+    working_dir: /tmp
+    environment:
+      HOME: /tmp
+      PYSPARK_PYTHON: python3
+    ports:
+      - "127.0.0.1:4040:4040"
+    volumes:
+      - ./employees.csv:/workspace/employees.csv:ro
+      - ./demo.py:/workspace/demo.py:ro
+    command:
+      - bash
+      - -c
+      - "echo 'Spark container ready. Start PySpark or submit demo.py.'; exec sleep infinity"
